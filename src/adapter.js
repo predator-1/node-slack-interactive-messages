@@ -206,7 +206,7 @@ export class SlackMessageAdapter {
     const requestListener = this.requestListener();
     return (req, res, next) => {
       // If parser is being used, we can't verify request signature
-      if (req.body) {
+      if (!req.body) {
         const error = new Error('Parsing request body prohibits request signature verification');
         error.code = errorCodes.BODY_PARSER_NOT_PERMITTED;
         next(error);
